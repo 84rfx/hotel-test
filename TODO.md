@@ -1,0 +1,6 @@
+- [x] Remove "Tambah Pengguna" button from resources/views/admin/users.blade.php
+- [x] Add search functionality for rooms in public/assets/js/admin.js
+- [x] Add search functionality for users in public/assets/js/admin.js
+- [x] Add reservation history section to resources/views/admin/reservations.blade.php
+- [x] Add search functionality for reservations in public/assets/js/admin.js
+- [x] Add search functionality for history in public/assets/js/admin.js

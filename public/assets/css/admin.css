@@ -1,0 +1,418 @@
+/* style.css - StayEasy Hotel */
+body { padding-top: 70px; }
+.hero { background: linear-gradient(90deg, rgba(2,6,23,0.85), rgba(13,37,63,0.7)); color: white; padding: 60px 0; }
+.card-room img { height: 180px; object-fit: cover; }
+.profile-avatar { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; }
+.form-ktp img { max-width: 200px; display:block; margin-top:10px; }
+.footer { padding: 20px 0; text-align: center; color: #666; margin-top: 40px; }
+.admin-topbar { background: #fff; border-bottom:1px solid #eaeaea; }
+.content-area { padding:20px; }
+.invalid-feedback { display: none; }
+.was-validated .form-control:invalid ~ .invalid-feedback { display: block; }
+/* Admin style B: topbar full width + dropdown */
+.admin-topbar-full { background: linear-gradient(90deg,#0d6efd,#0b5ed7); color:white; padding:12px 20px; }
+.admin-topbar-full .brand { font-weight:700; }
+.admin-topbar-full .user-dropdown img{ width:36px;height:36px;border-radius:50%; }
+.sidebar-compact { width:220px; background:#f8f9fa; padding:12px; border-right:1px solid #eaeaea; min-height: calc(100vh - 64px); }
+.admin-content { padding:20px; }
+.table-img { width:100px; height:60px; object-fit:cover; border-radius:6px; }
+
+/* Enhanced Admin Styles */
+.admin-dashboard .card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.admin-dashboard .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.admin-dashboard .card h6 {
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.admin-dashboard .card h2 {
+  color: #007bff;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+.admin-dashboard .stat-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.admin-dashboard .stat-card:nth-child(2) {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.admin-dashboard .stat-card:nth-child(3) {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.admin-dashboard .stat-card .card-body {
+  text-align: center;
+  padding: 30px;
+}
+
+.admin-dashboard .stat-card i {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  opacity: 0.8;
+}
+
+.admin-dashboard .table {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.admin-dashboard .table thead th {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  font-weight: 600;
+}
+
+.admin-dashboard .table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.admin-dashboard .log-card {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.admin-dashboard .log-card .card-body {
+  padding: 30px;
+}
+
+.admin-dashboard .log-card h5 {
+  color: #333;
+  font-weight: bold;
+}
+
+.admin-dashboard .log-card p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Admin Table Styles */
+.admin-table-container {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.admin-table-header {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.admin-table-header h4 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.admin-table-header .btn {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 25px;
+  transition: all 0.3s;
+}
+
+.admin-table-header .btn:hover {
+  background: white;
+  color: #007bff;
+}
+
+.admin-table-search {
+  margin-top: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.admin-table-search input {
+  border-radius: 25px;
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+.admin-table {
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.admin-table thead th {
+  background: #f8f9fa;
+  color: #333;
+  border: none;
+  font-weight: 600;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.admin-table tbody tr {
+  transition: background 0.3s;
+}
+
+.admin-table tbody tr:hover {
+  background: #f8f9ff;
+  transform: scale(1.01);
+}
+
+.admin-table td {
+  padding: 15px 20px;
+  vertical-align: middle;
+  border-color: #f0f0f0;
+}
+
+.admin-table .table-img {
+  width: 80px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.admin-table .btn-sm {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  margin: 0 2px;
+  transition: all 0.3s;
+}
+
+.admin-table .btn-warning {
+  background: #ffc107;
+  border-color: #ffc107;
+  color: #212529;
+}
+
+.admin-table .btn-danger {
+  background: #dc3545;
+  border-color: #dc3545;
+}
+
+.admin-table .btn-success {
+  background: #28a745;
+  border-color: #28a745;
+}
+
+.admin-table .btn-primary {
+  background: #007bff;
+  border-color: #007bff;
+}
+
+.admin-table .badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.admin-edit-form {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 30px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.admin-edit-form .form-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.admin-edit-form .form-control {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 12px 15px;
+  transition: border-color 0.3s;
+}
+
+.admin-edit-form .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+.admin-edit-form .avatar-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #f8f9fa;
+  margin-bottom: 15px;
+}
+
+.admin-edit-form .btn {
+  border-radius: 25px;
+  padding: 12px 30px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-dashboard .stat-card .card-body {
+    padding: 20px;
+  }
+  .admin-dashboard .stat-card i {
+    font-size: 2rem;
+  }
+  .admin-dashboard .card h2 {
+    font-size: 2rem;
+  }
+
+  body {
+    padding-top: 60px; /* Adjust for smaller topbar on mobile */
+  }
+
+  .admin-topbar-full {
+    padding: 8px 15px;
+  }
+
+  .admin-topbar-full .brand {
+    font-size: 1.1rem;
+  }
+
+  .sidebar-compact {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1050;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    background: #f8f9fa;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  }
+
+  .sidebar-compact.show {
+    transform: translateX(0);
+  }
+
+  .sidebar-compact .nav-link {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+
+  .admin-content {
+    padding: 15px;
+    margin-left: 0 !important; /* Ensure no margin on mobile */
+  }
+
+  .admin-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .admin-table {
+    min-width: 600px; /* Ensure horizontal scroll on mobile */
+  }
+
+  .admin-table-header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .admin-table-header .admin-table-search {
+    max-width: none;
+    width: 100%;
+  }
+
+  .admin-table td {
+    padding: 10px 8px;
+    font-size: 0.85rem;
+    white-space: nowrap; /* Prevent text wrap in cells */
+  }
+
+  .admin-table .table-img {
+    width: 60px;
+    height: 40px;
+  }
+
+  .admin-table .btn-sm {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    margin: 1px;
+  }
+
+  .admin-edit-form {
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .admin-edit-form .form-control,
+  .admin-edit-form .form-select {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .admin-edit-form .avatar-preview {
+    width: 100px;
+    height: 100px;
+  }
+
+  .admin-edit-form .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .admin-edit-form .btn:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Overlay for sidebar on mobile */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1040;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+  }
+
+  .sidebar-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (max-width: 576px) {
+  .admin-topbar-full .user-dropdown img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .admin-table th {
+    font-size: 0.8rem;
+    padding: 8px 4px;
+  }
+}

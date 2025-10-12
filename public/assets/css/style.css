@@ -1,0 +1,273 @@
+/* style.css - StayEasy Hotel */
+body { padding-top: 70px; }
+.hero { background: linear-gradient(90deg, rgba(2,6,23,0.85), rgba(13,37,63,0.7)); color: white; padding: 60px 0; }
+.card-room img { height: 180px; object-fit: cover; }
+.profile-avatar { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; }
+.form-ktp img { max-width: 200px; display:block; margin-top:10px; }
+.footer { padding: 20px 0; text-align: center; color: #666; margin-top: 40px; }
+.admin-topbar { background: #fff; border-bottom:1px solid #eaeaea; }
+.content-area { padding:20px; }
+.invalid-feedback { display: none; }
+.was-validated .form-control:invalid ~ .invalid-feedback { display: block; }
+/* Admin style B: topbar full width + dropdown */
+.admin-topbar-full { background: linear-gradient(90deg,#0d6efd,#0b5ed7); color:white; padding:12px 20px; }
+.admin-topbar-full .brand { font-weight:700; }
+.admin-topbar-full .user-dropdown img{ width:36px;height:36px;border-radius:50%; }
+.sidebar-compact { width:220px; background:#f8f9fa; padding:12px; border-right:1px solid #eaeaea; min-height: calc(100vh - 64px); }
+.admin-content { padding:20px; }
+.table-img { width:100px; height:60px; object-fit:cover; border-radius:6px; }
+
+/* New styles for redesigned home page */
+.hero-section {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../img/room1.jpg') center/cover no-repeat fixed;
+  min-height: 80vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: white;
+  padding-top: 70px; /* Account for fixed navbar */
+}
+
+.promo-banner {
+  background: linear-gradient(45deg, #dc3545, #007bff);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.search-container {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  max-width: 900px;
+  margin: 0 auto 40px;
+}
+
+.search-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-col {
+  flex: 1;
+  min-width: 150px;
+}
+
+.search-col label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.search-col input, .search-col select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.search-btn {
+  background: #dc3545;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.search-btn:hover {
+  background: #c82333;
+}
+
+.chat-btn {
+  background: #007bff;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.chat-btn:hover {
+  background: #0056b3;
+  color: white;
+}
+
+.phone-badge {
+  background: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.rooms-section {
+  padding: 60px 0;
+  background: #f8f9fa;
+}
+
+.rooms-section h3 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #333;
+  font-size: 2.5rem;
+}
+
+.card-room {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-room:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.card-room .card-img-top {
+  height: 200px;
+  object-fit: cover;
+  position: relative;
+}
+
+.card-room .card-img-top::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-room:hover .card-img-top::after {
+  opacity: 1;
+}
+
+.card-room .card-body {
+  padding: 20px;
+  background: white;
+}
+
+.card-room .card-title {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.card-room .btn-outline-info {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.card-room .btn-outline-info:hover {
+  background: #007bff;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-row {
+    flex-direction: column;
+  }
+  .hero-section {
+    min-height: 60vh;
+    background-attachment: scroll;
+  }
+  .promo-banner {
+    margin: 0 20px 20px;
+    padding: 15px;
+  }
+  .search-container {
+    margin: 0 20px 20px;
+    padding: 20px;
+  }
+  .rooms-section h3 {
+    font-size: 2rem;
+  }
+}
+
+/* Enhancements for other pages */
+.about-hero {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../img/room2.jpg') center/cover;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.reservation-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.history-table {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.history-table th {
+  background: #007bff;
+  color: white;
+}
+
+.profile-section {
+  background: #f8f9fa;
+  padding: 40px 0;
+}
+
+.profile-tabs .nav-link {
+  border-radius: 8px 8px 0 0;
+  margin-right: 5px;
+}
+
+.profile-avatar-large {
+  width: 150px;
+  height: 150px;
+  border: 4px solid #007bff;
+}
+
+/* Carousel controls visibility */
+.carousel-control-prev, .carousel-control-next {
+  background: rgba(0, 0, 0, 0.3);
+  width: 5%;
+  opacity: 1;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
