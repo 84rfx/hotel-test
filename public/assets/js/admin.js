@@ -169,9 +169,33 @@ function adminInit(){
   const elUsers = document.getElementById('stat-users');
   const elRooms = document.getElementById('stat-rooms');
   const elRes = document.getElementById('stat-reservations');
+  const elRevenue = document.getElementById('total-revenue');
   if(elUsers) elUsers.innerText = users.length || 0;
   if(elRooms) elRooms.innerText = rooms.length || 3;
   if(elRes) elRes.innerText = reservations.length || 0;
+
+  // Calculate revenue for current month
+  if(elRevenue){
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+    let totalRevenue = 0;
+
+    reservations.forEach(res => {
+      const checkinDate = new Date(res.checkin);
+      if(checkinDate.getMonth() === currentMonth && checkinDate.getFullYear() === currentYear){
+        // Find room price
+        const room = rooms.find(r => r.name === res.room.split(' - ')[0]);
+        if(room){
+          // Calculate nights (simplified)
+          const checkoutDate = new Date(res.checkout);
+          const nights = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24));
+          totalRevenue += room.price * nights;
+        }
+      }
+    });
+
+    elRevenue.innerText = 'Rp ' + totalRevenue.toLocaleString('id-ID');
+  }
 
   const roomsTable = document.getElementById('rooms-table-body');
   if(roomsTable){
@@ -309,6 +333,117 @@ function adminInit(){
     dailyStatsBody.innerHTML = '';
     Object.entries(dailyStats).sort(([a],[b]) => new Date(b) - new Date(a)).forEach(([date, count]) => {
       dailyStatsBody.innerHTML += `<tr><td>${date}</td><td>${count}</td></tr>`;
+    });
+  }
+
+  // Analytics Charts
+  const monthlyReservationsChartCanvas = document.getElementById('monthlyReservationsChart');
+  if(monthlyReservationsChartCanvas){
+    const monthlyData = {};
+    reservations.forEach(r => {
+      const date = new Date(r.checkin);
+      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      monthlyData[monthKey] = (monthlyData[monthKey] || 0) + 1;
+    });
+
+    const labels = Object.keys(monthlyData).sort();
+    const data = labels.map(label => monthlyData[label]);
+
+    new Chart(monthlyReservationsChartCanvas, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Reservasi Bulanan',
+          data: data,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
+  const roomDistributionChartCanvas = document.getElementById('roomDistributionChart');
+  if(roomDistributionChartCanvas){
+    const roomStats = {};
+    reservations.forEach(r => {
+      const roomType = r.room.split(' - ')[0];
+      roomStats[roomType] = (roomStats[roomType] || 0) + 1;
+    });
+
+    const labels = Object.keys(roomStats);
+    const data = labels.map(label => roomStats[label]);
+
+    new Chart(roomDistributionChartCanvas, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Distribusi Kamar',
+          data: data,
+          backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)'
+          ]
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+  }
+
+  const revenueChartCanvas = document.getElementById('revenueChart');
+  if(revenueChartCanvas){
+    const revenueData = {};
+    reservations.forEach(r => {
+      const date = new Date(r.checkin);
+      const year = date.getFullYear();
+      const room = rooms.find(rm => rm.name === r.room.split(' - ')[0]);
+      if(room){
+        const checkoutDate = new Date(r.checkout);
+        const nights = Math.ceil((checkoutDate - date) / (1000 * 60 * 60 * 24));
+        revenueData[year] = (revenueData[year] || 0) + (room.price * nights);
+      }
+    });
+
+    const labels = Object.keys(revenueData).sort();
+    const data = labels.map(label => revenueData[label]);
+
+    new Chart(revenueChartCanvas, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Pendapatan Tahunan (Rp)',
+          data: data,
+          backgroundColor: 'rgb(75, 192, 192)',
+          borderColor: 'rgb(75, 192, 192)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return 'Rp ' + value.toLocaleString('id-ID');
+              }
+            }
+          }
+        }
+      }
     });
   }
 }

@@ -51,6 +51,14 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Beranda</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">Tentang Kami</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}">Galeri</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Kontak</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('faq') }}">FAQ</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="global-search-btn">
+            <i class="bi bi-search"></i> Cari
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav" id="auth-links">
         <!-- dynamic links -->
@@ -106,6 +114,98 @@
       body.classList.remove('fade-out');
     }, 100);
   });
+
+  // Global Search Modal
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchBtn = document.getElementById('global-search-btn');
+    if(searchBtn){
+      searchBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        showGlobalSearchModal();
+      });
+    }
+  });
+
+  function showGlobalSearchModal(){
+    // Create modal if it doesn't exist
+    let modal = document.getElementById('global-search-modal');
+    if(!modal){
+      modal = document.createElement('div');
+      modal.className = 'modal fade';
+      modal.id = 'global-search-modal';
+      modal.innerHTML = `
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><i class="bi bi-search me-2"></i>Global Search</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <input type="text" class="form-control mb-3" id="global-search-input" placeholder="Cari kamar, fasilitas, atau informasi hotel...">
+              <div id="search-results" class="search-results">
+                <div class="text-muted">Ketik untuk mencari...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    const bsModal = new bootstrap.Modal(modal);
+    bsModal.show();
+
+    // Focus on search input
+    setTimeout(() => {
+      document.getElementById('global-search-input').focus();
+    }, 500);
+
+    // Search functionality
+    const searchInput = document.getElementById('global-search-input');
+    const resultsDiv = document.getElementById('search-results');
+
+    searchInput.addEventListener('input', function(){
+      const query = this.value.toLowerCase().trim();
+      if(query.length < 2){
+        resultsDiv.innerHTML = '<div class="text-muted">Ketik minimal 2 karakter...</div>';
+        return;
+      }
+
+      // Mock search results (in real app, this would be API call)
+      const mockResults = [
+        {type: 'Kamar', title: 'Superior Room', desc: 'Kamar nyaman untuk 2 orang', link: '/room-detail?id=1'},
+        {type: 'Kamar', title: 'Deluxe Room', desc: 'Kamar premium dengan pemandangan kota', link: '/room-detail?id=2'},
+        {type: 'Fasilitas', title: 'Kolam Renang', desc: 'Kolam renang outdoor dengan pemandangan', link: '/gallery#facilities'},
+        {type: 'Fasilitas', title: 'Fitness Center', desc: 'Gym lengkap dengan equipment modern', link: '/gallery#facilities'},
+        {type: 'Restoran', title: 'Restoran Utama', desc: 'Sajian internasional dan lokal', link: '/gallery#restaurant'},
+        {type: 'Event', title: 'Ruang Konferensi', desc: 'Ruang meeting untuk 50-100 orang', link: '/gallery#events'}
+      ];
+
+      const filtered = mockResults.filter(item =>
+        item.title.toLowerCase().includes(query) ||
+        item.desc.toLowerCase().includes(query) ||
+        item.type.toLowerCase().includes(query)
+      );
+
+      if(filtered.length === 0){
+        resultsDiv.innerHTML = '<div class="text-muted">Tidak ada hasil ditemukan.</div>';
+        return;
+      }
+
+      resultsDiv.innerHTML = filtered.map(item => `
+        <div class="search-result-item p-3 border-bottom">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <small class="text-primary">${item.type}</small>
+              <h6 class="mb-1">${item.title}</h6>
+              <p class="mb-0 text-muted small">${item.desc}</p>
+            </div>
+            <a href="${item.link}" class="btn btn-sm btn-outline-primary">Lihat</a>
+          </div>
+        </div>
+      `).join('');
+    });
+  }
 </script>
 </body>
 </html>

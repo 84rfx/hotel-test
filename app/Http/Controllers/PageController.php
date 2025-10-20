@@ -41,6 +41,26 @@ class PageController extends Controller
         return view('history');
     }
 
+    public function gallery()
+    {
+        return view('gallery');
+    }
+
+    public function contact()
+    {
+        return view('contact');
+    }
+
+    public function faq()
+    {
+        return view('faq');
+    }
+
+    public function roomDetail($id)
+    {
+        return view('room-detail', compact('id'));
+    }
+
     public function adminDashboard()
     {
         return view('admin.dashboard');

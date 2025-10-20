@@ -78,16 +78,27 @@
                   </div>
                 </div>
                 <div class="row g-2 mt-3">
-                  <div class="col">
+                  <div class="col-md-6">
                     <label class="form-label"><i class="bi bi-people text-muted me-1"></i>Jumlah Dewasa</label>
                     <input id="adults" name="adults" type="number" class="form-control" min="1" value="1" required>
                     <div class="invalid-feedback">Minimal 1 dewasa.</div>
                   </div>
-                  <div class="col">
+                  <div class="col-md-6">
                     <label class="form-label"><i class="bi bi-child text-muted me-1"></i>Jumlah Anak</label>
                     <input id="kids" name="kids" type="number" class="form-control" min="0" value="0" required>
                     <div class="invalid-feedback">Jumlah anak minimal 0.</div>
                   </div>
+                </div>
+                <div class="mt-3">
+                  <label class="form-label"><i class="bi bi-house text-muted me-1"></i>Jumlah Kamar</label>
+                  <select class="form-select" name="room-count" id="room-count">
+                    <option value="1">1 Kamar</option>
+                    <option value="2">2 Kamar</option>
+                    <option value="3">3 Kamar</option>
+                    <option value="4">4 Kamar</option>
+                    <option value="5">5 Kamar</option>
+                  </select>
+                  <small class="text-muted">*Multi-room booking tersedia untuk reservasi grup</small>
                 </div>
               </div>
 

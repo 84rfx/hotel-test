@@ -10,6 +10,10 @@ Route::get('/reservation', [PageController::class, 'reservation'])->name('reserv
 Route::get('/profile', [PageController::class, 'profile'])->name('profile');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/history', [PageController::class, 'history'])->name('history');
+Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::get('/faq', [PageController::class, 'faq'])->name('faq');
+Route::get('/room/{id}', [PageController::class, 'roomDetail'])->name('room.detail');
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [PageController::class, 'adminDashboard'])->name('admin.dashboard');

@@ -5,7 +5,7 @@
 @section('content')
 <div class="admin-dashboard">
   <div class="row mb-4">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card stat-card mb-3">
         <div class="card-body">
           <i class="bi bi-people"></i>
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card stat-card mb-3">
         <div class="card-body">
           <i class="bi bi-house-door"></i>
@@ -23,12 +23,55 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card stat-card mb-3">
         <div class="card-body">
           <i class="bi bi-calendar-check"></i>
           <h6>Reservasi</h6>
           <h2 id="stat-reservations">0</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card stat-card mb-3">
+        <div class="card-body">
+          <i class="bi bi-cash"></i>
+          <h6>Pendapatan Bulan Ini</h6>
+          <h2 id="total-revenue" class="text-success">Rp 0</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5><i class="bi bi-bar-chart-line me-2"></i>Reservasi Bulanan</h5>
+        </div>
+        <div class="card-body">
+          <canvas id="monthlyReservationsChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5><i class="bi bi-pie-chart me-2"></i>Distribusi Kamar</h5>
+        </div>
+        <div class="card-body">
+          <canvas id="roomDistributionChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5><i class="bi bi-graph-up me-2"></i>Pendapatan Tahunan</h5>
+        </div>
+        <div class="card-body">
+          <canvas id="revenueChart"></canvas>
         </div>
       </div>
     </div>

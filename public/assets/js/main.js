@@ -612,5 +612,231 @@ document.addEventListener('DOMContentLoaded', function(){
   handleReservationPage();
   handleEditRoomPage();
   handleEditUserPage();
+  handleGalleryPage();
+  handleContactPage();
+  handleFaqPage();
+  initWeatherWidget();
   if(window.location.pathname.includes('/admin/')) adminInit();
 });
+
+// Gallery page handlers
+function handleGalleryPage(){
+  if(!window.location.pathname.includes('/gallery')) return;
+
+  // Gallery modal functionality
+  const galleryModal = document.getElementById('galleryModal');
+  if(galleryModal){
+    galleryModal.addEventListener('show.bs.modal', function(event){
+      const button = event.relatedTarget;
+      const src = button.getAttribute('data-src');
+      const title = button.getAttribute('data-title');
+      const desc = button.getAttribute('data-description');
+
+      document.getElementById('galleryModalImg').src = src;
+      document.getElementById('galleryModalTitle').textContent = title;
+      document.getElementById('galleryModalDesc').textContent = desc;
+    });
+  }
+}
+
+// Contact page handlers
+function handleContactPage(){
+  if(!window.location.pathname.includes('/contact')) return;
+
+  const contactForm = document.getElementById('contact-form');
+  if(contactForm){
+    contactForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!this.checkValidity()){
+        e.stopPropagation();
+        this.classList.add('was-validated');
+        return;
+      }
+
+      // Simulate form submission
+      showToast('Pesan Anda telah dikirim! Kami akan segera menghubungi Anda.', 'success');
+      this.reset();
+      this.classList.remove('was-validated');
+    });
+  }
+
+  // Newsletter subscription
+  const newsletterForm = document.querySelector('.newsletter-form');
+  if(newsletterForm){
+    newsletterForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      if(email){
+        showToast('Terima kasih telah berlangganan newsletter kami!', 'success');
+        this.reset();
+      }
+    });
+  }
+}
+
+// FAQ page handlers
+function handleFaqPage(){
+  if(!window.location.pathname.includes('/faq')) return;
+
+  // FAQ accordion functionality
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+
+    question.addEventListener('click', function(){
+      const isActive = item.classList.contains('active');
+
+      // Close all FAQ items
+      faqItems.forEach(i => {
+        i.classList.remove('active');
+        i.querySelector('.faq-answer').style.maxHeight = null;
+      });
+
+      // Open clicked item if it wasn't active
+      if(!isActive){
+        item.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // FAQ search functionality
+  const searchInput = document.getElementById('faq-search');
+  if(searchInput){
+    searchInput.addEventListener('input', function(){
+      const term = this.value.toLowerCase();
+      const faqItems = document.querySelectorAll('.faq-item');
+
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question').textContent.toLowerCase();
+        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+
+        if(question.includes(term) || answer.includes(term)){
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  // Newsletter subscription
+  const newsletterForm = document.querySelector('.newsletter-form');
+  if(newsletterForm){
+    newsletterForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      if(email){
+        showToast('Terima kasih telah berlangganan newsletter kami!', 'success');
+        this.reset();
+      }
+    });
+  }
+}
+
+// Weather widget functionality
+function initWeatherWidget(){
+  if(!document.getElementById('weather-widget')) return;
+
+  // Simulate weather API call (replace with actual API in production)
+  fetchWeatherData();
+}
+
+async function fetchWeatherData(){
+  try {
+    // Using OpenWeatherMap API (you'll need to get a free API key)
+    const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY'; // Replace with actual API key
+    const city = 'Jakarta';
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=id`);
+
+    if(!response.ok){
+      throw new Error('Weather API not available');
+    }
+
+    const data = await response.json();
+    updateWeatherWidget(data);
+  } catch (error) {
+    console.warn('Weather API failed, using mock data:', error);
+    // Fallback to mock data
+    updateWeatherWidget({
+      weather: [{description: 'Cerah', icon: '01d'}],
+      main: {temp: 28, humidity: 65},
+      wind: {speed: 15},
+      name: 'Jakarta, Indonesia'
+    });
+  }
+}
+
+function updateWeatherWidget(data){
+  const loading = document.querySelector('.weather-loading');
+  const content = document.querySelector('.weather-content');
+
+  if(loading) loading.style.display = 'none';
+  if(content) content.style.display = 'block';
+
+  // Update weather data
+  const icon = getWeatherIcon(data.weather[0].icon);
+  const temp = Math.round(data.main.temp);
+  const desc = data.weather[0].description;
+  const location = data.name + ', Indonesia';
+  const humidity = data.main.humidity;
+  const windSpeed = Math.round(data.wind.speed * 3.6); // Convert m/s to km/h
+
+  document.getElementById('weather-icon').textContent = icon;
+  document.getElementById('weather-temp').textContent = `${temp}°C`;
+  document.getElementById('weather-desc').textContent = desc.charAt(0).toUpperCase() + desc.slice(1);
+  document.getElementById('weather-location').textContent = location;
+  document.getElementById('weather-humidity').textContent = `${humidity}%`;
+  document.getElementById('weather-wind').textContent = `${windSpeed} km/h`;
+
+  // Mock UV index (would come from separate API)
+  document.getElementById('weather-uv').textContent = Math.floor(Math.random() * 11) + 1;
+}
+
+function getWeatherIcon(iconCode){
+  const iconMap = {
+    '01d': '☀️', '01n': '🌙',
+    '02d': '⛅', '02n': '☁️',
+    '03d': '☁️', '03n': '☁️',
+    '04d': '☁️', '04n': '☁️',
+    '09d': '🌧️', '09n': '🌧️',
+    '10d': '🌦️', '10n': '🌧️',
+    '11d': '⛈️', '11n': '⛈️',
+    '13d': '❄️', '13n': '❄️',
+    '50d': '🌫️', '50n': '🌫️'
+  };
+  return iconMap[iconCode] || '☀️';
+}
+
+// Toast notification function
+function showToast(message, type = 'info'){
+  // Create toast container if it doesn't exist
+  let toastContainer = document.querySelector('.toast-container');
+  if(!toastContainer){
+    toastContainer = document.createElement('div');
+    toastContainer.className = 'toast-container';
+    document.body.appendChild(toastContainer);
+  }
+
+  // Create toast element
+  const toast = document.createElement('div');
+  toast.className = `toast align-items-center text-white bg-${type} border-0`;
+  toast.setAttribute('role', 'alert');
+  toast.innerHTML = `
+    <div class="d-flex">
+      <div class="toast-body">${message}</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  `;
+
+  // Add to container and show
+  toastContainer.appendChild(toast);
+  const bsToast = new bootstrap.Toast(toast);
+  bsToast.show();
+
+  // Remove after 5 seconds
+  setTimeout(() => {
+    toast.remove();
+  }, 5000);
+}

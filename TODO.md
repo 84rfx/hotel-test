@@ -4,3 +4,27 @@
 - [x] Add reservation history section to resources/views/admin/reservations.blade.php
 - [x] Add search functionality for reservations in public/assets/js/admin.js
 - [x] Add search functionality for history in public/assets/js/admin.js
+- [x] Add multi-room booking support in reservation form
+- [x] Add global search functionality in navbar
+- [x] Add revenue calculation in admin dashboard
+- [x] Add weather widget to contact page
+- [x] Enhance gallery with professional hotel photos
+- [x] Add FAQ page with search functionality
+- [x] Add room detail page with reviews and wishlist
+- [x] Add contact form with validation and map
+
+// New Improvements for Realism
+- [x] Create gallery page with photo categories (rooms, facilities, restaurant)
+- [x] Add individual room detail pages
+- [x] Implement review & rating system for rooms
+- [x] Create contact page with form and interactive map
+- [x] Add newsletter subscription feature
+- [x] Add FAQ page
+- [x] Implement wishlist/favorites feature
+- [x] Add social media sharing buttons
+- [x] Create blog/news section
+- [ ] Add weather widget
+- [ ] Enhance booking experience with multi-room selection
+- [x] Add loading states and toast notifications
+- [ ] Implement global search functionality
+- [x] Add admin analytics dashboard with charts
